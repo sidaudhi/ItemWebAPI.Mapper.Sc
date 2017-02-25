@@ -1,4 +1,4 @@
-# Mapper for Sitecore Item Web API [![Build Status](https://travis-ci.org/developerforce/Force.com-Toolkit-for-NET.svg?branch=master)](https://travis-ci.org/developerforce/Force.com-Toolkit-for-NET) [![Build status](https://ci.appveyor.com/api/projects/status/43y1npcb2q0u7aca)](https://ci.appveyor.com/project/WadeWegner/force-com-toolkit-for-net)
+# Mapper for Sitecore Item Web API [![Build Status](https://travis-ci.org/sidaudhi/ItemWebAPI.Mapper.Sc.svg?branch=master)](https://travis-ci.org/sidaudhi/ItemWebAPI.Mapper.Sc)
 
 This library helps developers to query Sitecore and map custom models to Sitecore Items. 
 
