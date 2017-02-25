@@ -8,7 +8,7 @@ The library integrates with Sitecore through the Item Web API with all integrati
 
 ### Published Packages
 
-You can try the libraries immmediately by installing the following [ItemWebAPI.Mapper NuGet packages](https://www.nuget.org/profiles/DeveloperForce/).
+You can try the libraries immmediately by installing the following [ItemWebAPI.Mapper NuGet packages](https://www.nuget.org/packages/ItemWebAPI.Mapper.Sc/).
 
 ```
 Install-Package ItemWebAPI.Mapper.Sc
