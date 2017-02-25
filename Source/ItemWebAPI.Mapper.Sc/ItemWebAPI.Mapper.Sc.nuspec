@@ -6,9 +6,7 @@
     <title>$title$</title>
     <authors>sidaudhi</authors>
     <owners>sidaudhi</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <projectUrl>https://github.com/sidaudhi/ItemWebAPI.Mapper.Sc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Helps developers query Sitecore through the Item Web API and map custom models to Sitecore Items</description>
     <releaseNotes>Initial Commit</releaseNotes>
