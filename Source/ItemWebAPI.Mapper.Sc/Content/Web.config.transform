@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <configSections>
-    <section name="sitecore" type="ItemWebAPI.Mapper.Sc.Configuration.SitecoreConfiguration" />
+    <section name="sitecoreApi" type="ItemWebAPI.Mapper.Sc.Configuration.SitecoreConfiguration" />
   </configSections>
-  <sitecore configSource="App_Config\SitecoreApi.config" />
+  <sitecoreApi configSource="App_Config\SitecoreApi.config" />
 </configuration>

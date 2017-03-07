@@ -28,7 +28,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <param name="exceptionManager">ExceptionManager</param>
         public SitecoreApiClient(string database = null)
         {
-            _configuration = (SitecoreConfiguration)System.Configuration.ConfigurationManager.GetSection("sitecore");
+            _configuration = (SitecoreConfiguration)System.Configuration.ConfigurationManager.GetSection("sitecoreApi");
             if (_configuration != null)
             {
                 _database = !String.IsNullOrEmpty(database) ? database : _configuration.Host.Database;
