@@ -83,7 +83,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
                                     property.SetValue(targetItem, Convert.ToDouble(field.Value));
                                 break;
                             case FieldType.Droplink:
-                                var method = this.GetType().GetMethod("GetItem", BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(info.PropertyType);
+                                var method = this.GetType().GetMethod("GetItem").MakeGenericMethod(info.PropertyType);
                                 var linkResult = method.Invoke(this, new object[] { field.Value, language });
                                 property.SetValue(targetItem, linkResult);
                                 break;
