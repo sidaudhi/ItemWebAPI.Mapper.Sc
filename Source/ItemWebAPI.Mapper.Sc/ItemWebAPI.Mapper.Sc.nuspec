@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>ItemWebAPI.Mapper.Sc</id>
-    <version>$version$</version>
+    <version>1.0.2.0</version>
     <title>$title$</title>
     <authors>sidaudhi</authors>
     <owners>sidaudhi</owners>
     <projectUrl>https://github.com/sidaudhi/ItemWebAPI.Mapper.Sc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Helps developers query Sitecore through the Item Web API and map custom models to Sitecore Items</description>
-    <releaseNotes>Initial Commit</releaseNotes>
+    <releaseNotes>Included language parameter</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>Sitecore Mapper ItemWebAPI REST WebAPI API</tags>
   </metadata>

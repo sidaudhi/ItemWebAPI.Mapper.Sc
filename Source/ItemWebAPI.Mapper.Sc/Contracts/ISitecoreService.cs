@@ -11,10 +11,10 @@ namespace ItemWebAPI.Mapper.Sc.Contracts
     /// </summary>
     public interface ISitecoreService
     {
-        IEnumerable<T> GetItems<T>(string query) where T : new();
+        IEnumerable<T> GetItems<T>(string query, string language = null) where T : new();
 
-        T GetItem<T>(string id) where T : new();
+        T GetItem<T>(string id, string language = null) where T : new();
 
-        IEnumerable<T> GetItems<T>(string[] ids) where T : new();
+        IEnumerable<T> GetItems<T>(string[] ids, string language = null) where T : new();
     }
 }

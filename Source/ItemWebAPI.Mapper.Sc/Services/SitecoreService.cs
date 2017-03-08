@@ -40,7 +40,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <typeparam name="T">Type with Parameters</typeparam>
         /// <param name="item">Sitecore Item</param>
         /// <returns></returns>
-        private T TransformItem<T>(Item item) where T : new()
+        private T TransformItem<T>(Item item, string language = null) where T : new()
         {
             var targetItem = new T();
             var propertyInfos = typeof(T).GetProperties();
@@ -84,13 +84,13 @@ namespace ItemWebAPI.Mapper.Sc.Services
                                 break;
                             case FieldType.Droplink:
                                 var method = this.GetType().GetMethod("GetItem", BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(info.PropertyType);
-                                var linkResult = method.Invoke(this, new object[] { field.Value });
+                                var linkResult = method.Invoke(this, new object[] { field.Value, language });
                                 property.SetValue(targetItem, linkResult);
                                 break;
                             case FieldType.Multilist:
                             case FieldType.Treelist:
                                 method = this.GetType().GetMethod("GetItemsByIds", BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(info.PropertyType.GetGenericArguments()[0]);
-                                var listResult = method.Invoke(this, new object[] { field.Value.Split('|').ToArray() });
+                                var listResult = method.Invoke(this, new object[] { field.Value.Split('|').ToArray(), language });
                                 property.SetValue(targetItem, listResult);
                                 break;
                             case FieldType.GeneralLink:
@@ -133,12 +133,12 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <typeparam name="T">Type with parameters</typeparam>
         /// <param name="items">Sitecore Items</param>
         /// <returns></returns>
-        private IEnumerable<T> TransformItems<T>(IEnumerable<Item> items) where T : new()
+        private IEnumerable<T> TransformItems<T>(IEnumerable<Item> items, string language = null) where T : new()
         {
             var responseItems = new List<T>();
             foreach (var item in items)
             {
-                var targetItem = TransformItem<T>(item);
+                var targetItem = TransformItem<T>(item, language);
                 responseItems.Add(targetItem);
             }
             return responseItems;
@@ -150,12 +150,12 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="ids"></param>
         /// <returns></returns>
-        private IEnumerable<T> GetItemsByIds<T>(string[] ids) where T: new()
+        private IEnumerable<T> GetItemsByIds<T>(string[] ids, string language) where T: new()
         {
             var items = new List<Item>();
             foreach (var id in ids)
             {
-                var item = _client.GetById(id);
+                var item = _client.GetById(id,language);
                 items.Add(item);
             }
             return TransformItems<T>(items);
@@ -170,9 +170,9 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <typeparam name="T">Type with Parameters</typeparam>
         /// <param name="query">Sitecore Query</param>
         /// <returns></returns>
-        public IEnumerable<T> GetItems<T>(string query) where T : new()
+        public IEnumerable<T> GetItems<T>(string query, string language = null) where T : new()
         {
-            var items = _client.GetByQuery(query);
+            var items = _client.GetByQuery(query, language);
             if (items == null)
                 return null;
             return TransformItems<T>(items);
@@ -184,9 +184,9 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <typeparam name="T">Type with Parameters</typeparam>
         /// <param name="id">Sitecore Item ID</param>
         /// <returns></returns>
-        public T GetItem<T>(string id) where T : new()
+        public T GetItem<T>(string id, string language = null) where T : new()
         {
-            var item = _client.GetById(id);
+            var item = _client.GetById(id, language);
             if (item == null)
                 return default(T);
             return TransformItem<T>(item);
@@ -198,9 +198,9 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="ids"></param>
         /// <returns>Collection of Transformed Items</returns>
-        public IEnumerable<T> GetItems<T>(string[] ids) where T : new()
+        public IEnumerable<T> GetItems<T>(string[] ids, string language = null) where T : new()
         {
-            return GetItemsByIds<T>(ids);
+            return GetItemsByIds<T>(ids, language);
         }
 
         #endregion
