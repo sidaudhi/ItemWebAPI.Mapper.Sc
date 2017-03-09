@@ -2,6 +2,7 @@
 using ItemWebAPI.Mapper.Sc.Contracts;
 using ItemWebAPI.Mapper.Sc.Enums;
 using ItemWebAPI.Mapper.Sc.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -57,9 +58,14 @@ namespace ItemWebAPI.Mapper.Sc.Services
                         var property = targetItem.GetType().GetProperty(info.Name);
                         var field = item.Fields.FirstOrDefault(i => i.Value.Name == mapperAttribute.Name).Value;
 
-                        if (mapperAttribute.Type == FieldType.Id)
+                        if (mapperAttribute.Type == FieldType.System)
                         {
-                            property.SetValue(targetItem, item.Id);
+                            var itemProps = item.GetType().GetProperties();
+                            var propInPlay = itemProps.FirstOrDefault(p => p.Name == mapperAttribute.Name);
+                            if (propInPlay != null && propInPlay.GetValue(item)!=null)
+                            {
+                                property.SetValue(targetItem, Convert.ChangeType(propInPlay.GetValue(item), property.PropertyType));
+                            }
                             continue;
                         }
 
@@ -80,7 +86,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
                                 if (info.PropertyType == typeof(Double))
                                     property.SetValue(targetItem, Convert.ToDouble(field.Value));
                                 if (info.PropertyType == typeof(int))
-                                    property.SetValue(targetItem, Convert.ToDouble(field.Value));
+                                    property.SetValue(targetItem, Convert.ToInt32(field.Value));
                                 break;
                             case FieldType.Droplink:
                                 var method = this.GetType().GetMethod("GetItem").MakeGenericMethod(info.PropertyType);

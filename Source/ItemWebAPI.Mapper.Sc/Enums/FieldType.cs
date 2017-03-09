@@ -18,6 +18,7 @@ namespace ItemWebAPI.Mapper.Sc.Enums
         Droplink,
         Number,
         Image,
-        Presentation
+        Presentation,
+        System
     }
 }
