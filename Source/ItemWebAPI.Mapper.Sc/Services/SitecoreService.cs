@@ -164,7 +164,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
                 var item = _client.GetById(id,language);
                 items.Add(item);
             }
-            return TransformItems<T>(items);
+            return TransformItems<T>(items, language);
         }
 
         #endregion
@@ -181,7 +181,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
             var items = _client.GetByQuery(query, language);
             if (items == null)
                 return null;
-            return TransformItems<T>(items);
+            return TransformItems<T>(items, language);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace ItemWebAPI.Mapper.Sc.Services
             var item = _client.GetById(id, language);
             if (item == null)
                 return default(T);
-            return TransformItem<T>(item);
+            return TransformItem<T>(item,language);
         }
 
         /// <summary>
