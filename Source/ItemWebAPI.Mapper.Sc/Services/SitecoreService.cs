@@ -151,7 +151,10 @@ namespace ItemWebAPI.Mapper.Sc.Services
             foreach (var item in items)
             {
                 var targetItem = TransformItem<T>(item, language);
-                responseItems.Add(targetItem);
+                if (targetItem != null)
+                {
+                    responseItems.Add(targetItem);
+                }
             }
             return responseItems;
         }
@@ -168,7 +171,10 @@ namespace ItemWebAPI.Mapper.Sc.Services
             foreach (var id in ids)
             {
                 var item = _client.GetById(id,language);
-                items.Add(item);
+                if (item != null)
+                {
+                    items.Add(item);
+                }
             }
             return TransformItems<T>(items, language);
         }
