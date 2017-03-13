@@ -43,6 +43,9 @@ namespace ItemWebAPI.Mapper.Sc.Services
         /// <returns></returns>
         private T TransformItem<T>(Item item, string language = null) where T : new()
         {
+            if (item == null)
+                return default(T);
+
             var targetItem = new T();
             var propertyInfos = typeof(T).GetProperties();
             foreach (var info in propertyInfos)
@@ -56,7 +59,6 @@ namespace ItemWebAPI.Mapper.Sc.Services
                     if (mapperAttribute != null)
                     {
                         var property = targetItem.GetType().GetProperty(info.Name);
-                        var field = item.Fields.FirstOrDefault(i => i.Value.Name == mapperAttribute.Name).Value;
 
                         if (mapperAttribute.Type == FieldType.System)
                         {
@@ -69,6 +71,10 @@ namespace ItemWebAPI.Mapper.Sc.Services
                             continue;
                         }
 
+                        if (item.Fields == null || item.Fields.FirstOrDefault(i => i.Value.Name == mapperAttribute.Name).Key == null)
+                            continue;
+
+                        var field = item.Fields.FirstOrDefault(i => i.Value.Name == mapperAttribute.Name).Value;
                         if (field == null || field.Value == null || String.IsNullOrEmpty(field.Value)) continue;
 
                         switch (mapperAttribute.Type)
